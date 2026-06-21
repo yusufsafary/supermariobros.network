@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "SuperMarioBros.Network"
+version = "1.0.0"
+id = "artifacts/supermario"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19929
+
+[services.development]
+run = "pnpm --filter @workspace/supermario run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/supermario", "run", "build" ]
+publicDir = "artifacts/supermario/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19929"
+BASE_PATH = "/"
