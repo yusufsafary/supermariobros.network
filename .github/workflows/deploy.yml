@@ -32,12 +32,13 @@ jobs:
           version: 9
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build
         env:
           BASE_PATH: /supermariobros.network/
           PORT: 3000
+          CI: "true"
         run: pnpm run build
 
       - name: Setup Pages

@@ -2,28 +2,24 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
+const isCI = process.env.CI === "true";
 const rawPort = process.env.PORT;
+const basePath = process.env.BASE_PATH ?? "/";
 
-if (!rawPort) {
-  throw new Error(
-    "PORT environment variable is required but was not provided.",
-  );
-}
+const port = rawPort ? Number(rawPort) : 3000;
 
-const port = Number(rawPort);
+const extraPlugins: any[] = [];
 
-if (Number.isNaN(port) || port <= 0) {
-  throw new Error(`Invalid PORT value: "${rawPort}"`);
-}
-
-const basePath = process.env.BASE_PATH;
-
-if (!basePath) {
-  throw new Error(
-    "BASE_PATH environment variable is required but was not provided.",
-  );
+if (!isCI && process.env.REPL_ID !== undefined) {
+  const [cartographer, devBanner, runtimeError] = await Promise.all([
+    import("@replit/vite-plugin-cartographer").catch(() => null),
+    import("@replit/vite-plugin-dev-banner").catch(() => null),
+    import("@replit/vite-plugin-runtime-error-modal").catch(() => null),
+  ]);
+  if (cartographer) extraPlugins.push(cartographer.cartographer({ root: path.resolve(import.meta.dirname, "..") }));
+  if (devBanner) extraPlugins.push(devBanner.devBanner());
+  if (runtimeError) extraPlugins.push(runtimeError.default());
 }
 
 export default defineConfig({
@@ -31,25 +27,11 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
-      ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer({
-              root: path.resolve(import.meta.dirname, ".."),
-            }),
-          ),
-          await import("@replit/vite-plugin-dev-banner").then((m) =>
-            m.devBanner(),
-          ),
-        ]
-      : []),
+    ...extraPlugins,
   ],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
-      "@assets": path.resolve(import.meta.dirname, "..", "..", "attached_assets"),
     },
     dedupe: ["react", "react-dom"],
   },
