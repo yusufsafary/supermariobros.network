@@ -712,8 +712,10 @@ export default function MarioGame({ level = 1, initialScore = 0, initialLives = 
   }, [level, initialScore, initialLives]);
 
   return (
-    <div className="relative w-full max-w-[800px] aspect-[4/3] bg-black border-8 border-white shadow-[12px_12px_0px_rgba(0,0,0,0.5)] overflow-hidden flex justify-center">
-      <div ref={gameRef} className="w-full h-full" />
+    <div className="w-full max-w-[800px] flex flex-col">
+      <div className="relative w-full aspect-[4/3] bg-black border-8 border-white shadow-[12px_12px_0px_rgba(0,0,0,0.5)] overflow-hidden">
+        <div ref={gameRef} className="w-full h-full" />
+      </div>
       <MobileControls />
     </div>
   );
