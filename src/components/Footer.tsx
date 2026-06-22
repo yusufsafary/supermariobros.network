@@ -30,18 +30,10 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t-4 border-black/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t-4 border-black/30 pt-8 text-center">
           <p className="text-gray-400 text-sm">
             2024 SuperMarioBros.Network. Fan project. Not affiliated with Nintendo Co., Ltd.
           </p>
-          <a
-            href="https://github.com/yusufsafary"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 bg-white text-black font-bold px-4 py-2 border-4 border-black hover:bg-accent transition-colors shadow-[4px_4px_0_rgba(0,0,0,1)] text-sm"
-          >
-            GitHub: yusufsafary
-          </a>
         </div>
       </div>
     </footer>
