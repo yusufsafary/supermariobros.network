@@ -13,15 +13,12 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section className="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 relative pt-20 pb-16">
-        {/* subtle glow blobs */}
         <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none opacity-20">
           <div className="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-2xl animate-pulse"/>
           <div className="absolute bottom-20 right-20 w-56 h-56 bg-accent rounded-full blur-3xl animate-pulse" style={{animationDelay:'1.2s'}}/>
         </div>
 
         <div className="z-10 flex flex-col items-center gap-6 max-w-4xl mx-auto">
-
-          {/* BIG Mario logo character */}
           <div className="relative">
             <div className="absolute -inset-4 bg-accent/20 rounded-full blur-xl"/>
             <MarioLogo
@@ -30,55 +27,21 @@ export default function Home() {
             />
           </div>
 
-          {/* Title */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.6)] uppercase tracking-widest leading-tight">
             Super Mario<br/>
             <span className="text-accent">Network</span>
           </h1>
 
-          {/* Subtitle badge */}
           <p className="text-lg md:text-xl font-bold bg-white text-primary px-6 py-3 border-4 border-black inline-block transform -rotate-1 shadow-[8px_8px_0px_rgba(0,0,0,1)]">
             A BOLD, JOYFUL FAN TRIBUTE
           </p>
 
-          {/* CTA */}
           <button
             onClick={scrollToGame}
             className="mt-4 bg-primary hover:bg-red-600 text-white font-display text-xl md:text-2xl px-10 py-6 border-4 border-white shadow-[0_8px_0px_rgba(0,0,0,0.6)] active:translate-y-2 active:shadow-none transition-all flex items-center gap-3"
           >
             <span>🎮</span> PLAY NOW
           </button>
-
-          {/* Social + Sponsor row */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
-            {/* X / Twitter */}
-            <a
-              href="https://x.com/playmariobros"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-black/70 hover:bg-black text-white font-bold text-sm px-5 py-3 border-2 border-white/30 hover:border-white transition-all"
-            >
-              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0" aria-hidden="true">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-              Follow @playmariobros
-            </a>
-
-            {/* EasyA logo */}
-            <a
-              href="https://easya.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-black/70 hover:bg-black px-5 py-3 border-2 border-white/30 hover:border-white transition-all"
-              title="Built with EasyA Kickstart"
-            >
-              <img
-                src="/easya-logo.png"
-                alt="EasyA Kickstart"
-                className="h-6 w-auto object-contain rounded"
-              />
-            </a>
-          </div>
         </div>
       </section>
 
