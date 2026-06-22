@@ -8,6 +8,7 @@ const navLinks = [
   { href: '/about', label: 'About' },
 ];
 
+
 export default function Navbar() {
   const [location, setLocation] = useLocation();
   const [open, setOpen] = useState(false);
@@ -51,12 +52,12 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <button
-            onClick={goToGame}
+          <Link
+            href="/play"
             className="bg-accent text-black font-display text-[9px] uppercase px-4 py-2 border-2 border-black shadow-[3px_3px_0_rgba(0,0,0,1)] hover:bg-yellow-300 active:translate-y-0.5 transition-all"
           >
-            Play Game
-          </button>
+            🎮 Play Game
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -82,12 +83,13 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <button
-            onClick={goToGame}
-            className="w-full text-left px-4 py-3 bg-accent text-black font-bold border-b-2 border-black/30 hover:bg-yellow-300 transition-colors flex items-center gap-2"
+          <Link
+            href="/play"
+            className="block w-full text-left px-4 py-3 bg-accent text-black font-bold border-b-2 border-black/30 hover:bg-yellow-300 transition-colors"
+            onClick={() => setOpen(false)}
           >
-            <span>🎮</span> Play Game
-          </button>
+            🎮 Play Game
+          </Link>
         </div>
       )}
     </nav>
