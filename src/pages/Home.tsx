@@ -1,5 +1,4 @@
 import React from 'react';
-import MarioGame from '@/components/MarioGame';
 import MarioLogo from '@/components/MarioLogo';
 import { Link } from 'wouter';
 import Footer from '@/components/Footer';
@@ -52,10 +51,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== GAME ===== */}
-      <section id="game" className="py-12 bg-[#87CEEB] border-y-8 border-black flex justify-center items-center relative min-h-[600px]">
-        <div className="w-full max-w-[800px] mx-auto px-4 md:px-0">
-          <MarioGame />
+      {/* ===== PLAY CTA ===== */}
+      <section className="py-16 bg-[#87CEEB] border-y-8 border-black px-4">
+        <div className="max-w-3xl mx-auto text-center flex flex-col items-center gap-8">
+          <h2 className="text-3xl md:text-4xl font-display text-black uppercase drop-shadow-[0_3px_0_rgba(255,255,255,0.6)] tracking-wide">
+            Ready to Play?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+            {[
+              { emoji: '🌿', world: 'World 1-1', sub: 'Classic Plains', diff: 'Beginner' },
+              { emoji: '🪨', world: 'World 2-1', sub: 'Underground', diff: 'Intermediate' },
+              { emoji: '🏰', world: 'World 3-1', sub: "Bowser's Castle", diff: 'Expert' },
+            ].map((lvl) => (
+              <div key={lvl.world} className="bg-white/80 border-4 border-black shadow-[6px_6px_0_rgba(0,0,0,1)] p-4 text-left">
+                <div className="text-3xl mb-2">{lvl.emoji}</div>
+                <p className="font-display text-primary text-[10px] uppercase mb-1">{lvl.world}</p>
+                <p className="font-bold text-black text-sm">{lvl.sub}</p>
+                <p className="text-black/50 text-xs mt-1">{lvl.diff}</p>
+              </div>
+            ))}
+          </div>
+          <Link
+            href="/play"
+            className="bg-primary hover:bg-red-600 text-white font-display text-2xl md:text-3xl px-12 py-6 border-4 border-white shadow-[0_8px_0px_rgba(0,0,0,0.6)] active:translate-y-2 active:shadow-none transition-all flex items-center gap-3 uppercase"
+          >
+            🎮 Play Now — 3 Worlds
+          </Link>
+          <p className="text-black/60 text-sm font-bold">Timer · Power-ups · High Score · Mobile Controls</p>
         </div>
       </section>
 
