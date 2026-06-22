@@ -32,9 +32,9 @@ export default function Home() {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-display text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.6)] uppercase tracking-wider leading-tight">
-            Super Mario Bros<br/>
-            <span className="text-accent">.Network</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.6)] uppercase tracking-widest leading-tight">
+            Super Mario<br/>
+            <span className="text-accent">Network</span>
           </h1>
 
           {/* Subtitle badge */}
