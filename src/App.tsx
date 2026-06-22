@@ -1,14 +1,34 @@
 import React from "react";
+import { Router, Route, Switch } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import Home from "@/pages/Home";
+import About from "@/pages/About";
+import HowToPlay from "@/pages/HowToPlay";
+import CookiePolicy from "@/pages/CookiePolicy";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import Terms from "@/pages/Terms";
+import NotFound from "@/pages/not-found";
+import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 function App() {
   return (
-    <TooltipProvider>
-      <Home />
-      <Toaster />
-    </TooltipProvider>
+    <Router hook={useHashLocation}>
+      <TooltipProvider>
+        <Navbar />
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/how-to-play" component={HowToPlay} />
+          <Route path="/cookie-policy" component={CookiePolicy} />
+          <Route path="/privacy-policy" component={PrivacyPolicy} />
+          <Route path="/terms" component={Terms} />
+          <Route component={NotFound} />
+        </Switch>
+        <Toaster />
+      </TooltipProvider>
+    </Router>
   );
 }
 
