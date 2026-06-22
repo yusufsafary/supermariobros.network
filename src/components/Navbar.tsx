@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
+import MarioLogo from '@/components/MarioLogo';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -26,8 +27,15 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-primary border-b-4 border-black shadow-[0_4px_0_rgba(0,0,0,0.5)]">
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-14">
-        <Link href="/" className="font-display text-white text-[10px] md:text-xs hover:text-accent transition-colors">
-          SMB.NETWORK
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="w-10 h-10 shrink-0 group-hover:scale-110 transition-transform">
+            <MarioLogo size={40} />
+          </div>
+          <span className="font-display text-white text-[9px] leading-tight hidden sm:block group-hover:text-accent transition-colors">
+            SMB<br/>.NETWORK
+          </span>
         </Link>
 
         {/* Desktop nav */}
