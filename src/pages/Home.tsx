@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MarioGame from '@/components/MarioGame';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import Footer from '@/components/Footer';
 
 export default function Home() {
+  const [location] = useLocation();
+
   const scrollToGame = () => {
     document.getElementById('game')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // If navigated here via Play Game link, scroll to game automatically
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#play') {
+      setTimeout(() => {
+        document.getElementById('game')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col font-sans overflow-x-hidden">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="min-h-[80vh] flex flex-col items-center justify-center text-center px-4 relative pt-20 pb-20">
         <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none opacity-20">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full mix-blend-overlay blur-xl animate-pulse" />
@@ -25,14 +36,14 @@ export default function Home() {
           </p>
           <button
             onClick={scrollToGame}
-            className="mt-12 bg-primary hover:bg-red-600 text-white font-display text-xl md:text-2xl px-8 py-6 border-4 border-white shadow-[0_8px_0px_rgba(0,0,0,0.5)] active:translate-y-2 active:shadow-[0_0px_0px_rgba(0,0,0,0.5)] transition-all flex items-center gap-4"
+            className="mt-12 bg-primary hover:bg-red-600 text-white font-display text-xl md:text-2xl px-8 py-6 border-4 border-white shadow-[0_8px_0px_rgba(0,0,0,0.5)] active:translate-y-2 active:shadow-none transition-all flex items-center gap-3"
           >
-            PLAY NOW
+            <span>🎮</span> PLAY NOW
           </button>
         </div>
       </section>
 
-      {/* Game Section */}
+      {/* Game */}
       <section id="game" className="py-12 bg-[#87CEEB] border-y-8 border-black flex justify-center items-center relative min-h-[600px]">
         <div className="w-full max-w-[800px] mx-auto px-4 md:px-0">
           <MarioGame />
@@ -61,35 +72,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How to Play Section */}
+      {/* How to play summary */}
       <section className="py-20 bg-card text-card-foreground border-b-8 border-black px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display text-primary mb-12 text-center uppercase drop-shadow-[0_2px_0_rgba(0,0,0,1)]">How to Play</h2>
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-background/10 p-8 border-4 border-black shadow-[8px_8px_0_rgba(0,0,0,1)] bg-[#FFD700]">
+            <div className="bg-[#FFD700] p-8 border-4 border-black shadow-[8px_8px_0_rgba(0,0,0,1)]">
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <span className="bg-black text-white p-2 rounded">KBD</span> Keyboard
+                <span className="bg-black text-white p-2 rounded text-sm">KBD</span> Keyboard
               </h3>
               <ul className="space-y-4 text-lg font-medium">
                 <li className="flex items-center gap-4">
                   <div className="flex gap-2">
-                    <kbd className="bg-white border-2 border-b-4 border-gray-300 rounded px-2 py-1 min-w-[30px] text-center font-mono text-black">A</kbd>
-                    <kbd className="bg-white border-2 border-b-4 border-gray-300 rounded px-2 py-1 min-w-[30px] text-center font-mono text-black">D</kbd>
+                    <kbd className="bg-white border-2 border-b-4 border-gray-300 rounded px-2 py-1 min-w-[30px] text-center font-mono text-black text-sm">A</kbd>
+                    <kbd className="bg-white border-2 border-b-4 border-gray-300 rounded px-2 py-1 min-w-[30px] text-center font-mono text-black text-sm">D</kbd>
                   </div>
-                  <span>or Arrows to Move</span>
+                  <span className="text-black">or Arrow Keys to Move</span>
                 </li>
                 <li className="flex items-center gap-4">
-                  <kbd className="bg-white border-2 border-b-4 border-gray-300 rounded px-4 py-1 font-mono text-black">SPACE</kbd>
-                  <span>to Jump</span>
+                  <kbd className="bg-white border-2 border-b-4 border-gray-300 rounded px-3 py-1 font-mono text-black text-sm">SPACE</kbd>
+                  <span className="text-black">to Jump</span>
                 </li>
               </ul>
             </div>
-            <div className="bg-background/10 p-8 border-4 border-black shadow-[8px_8px_0_rgba(0,0,0,1)] bg-[#3A8C38] text-white">
+            <div className="bg-[#3A8C38] p-8 border-4 border-black shadow-[8px_8px_0_rgba(0,0,0,1)] text-white">
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3 drop-shadow-[0_2px_0_rgba(0,0,0,1)]">
-                <span className="bg-black text-white p-2 rounded">TAP</span> Mobile Touch
+                <span className="bg-black text-white p-2 rounded text-sm">TAP</span> Mobile Touch
               </h3>
               <p className="text-lg font-medium leading-relaxed drop-shadow-[0_1px_0_rgba(0,0,0,1)]">
-                Use the on-screen buttons overlaying the game canvas. Left and Right arrows move your character, and the big A button makes you jump.
+                On-screen buttons appear automatically. Left and Right to move, A button to jump.
               </p>
             </div>
           </div>
@@ -101,7 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About */}
       <section className="py-20 bg-background text-white px-4">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <h2 className="text-3xl font-display uppercase drop-shadow-[0_2px_0_rgba(0,0,0,1)] mb-8">About the Project</h2>
@@ -110,7 +121,7 @@ export default function Home() {
             Built completely from scratch using React, Vite, and Phaser.js.
           </p>
           <p className="text-lg opacity-90">
-            This project uses programmatic graphics instead of sprite sheets, rendering familiar shapes using code alone.
+            Programmatic graphics instead of sprite sheets, rendering familiar shapes entirely through code.
             Jump on Goombas, collect coins, and reach the flagpole!
           </p>
           <Link href="/about" className="inline-flex bg-accent text-black font-display text-xs uppercase px-8 py-4 border-4 border-black shadow-[6px_6px_0_rgba(0,0,0,0.5)] hover:bg-yellow-300 transition-colors mt-4">
